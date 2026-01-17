@@ -1,0 +1,30 @@
+{
+  "name": "nwhacksjanuary2026",
+  "version": "1.0.0",
+  "description": "Strava x BeReal fitness app backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fojoseph-dotcom/NwHacksJanuary2026.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fojoseph-dotcom/NwHacksJanuary2026/issues"
+  },
+  "homepage": "https://github.com/fojoseph-dotcom/NwHacksJanuary2026#readme"
+}
