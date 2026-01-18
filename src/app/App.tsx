@@ -4,8 +4,9 @@ import { DailyPrompt } from '@/app/components/DailyPrompt';
 import { ActivityRecorder } from '@/app/components/ActivityRecorder';
 import { Leaderboard } from '@/app/components/Leaderboard';
 import { Profile } from '@/app/components/Profile';
+import { Social } from '@/app/components/Social';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
-import { Home, Trophy, User, Footprints } from 'lucide-react';
+import { Home, Trophy, User, Footprints, Users } from 'lucide-react';
 import { Toaster } from '@/app/components/ui/sonner';
 import { Badge } from '@/app/components/ui/badge';
 import { Flame } from 'lucide-react';
@@ -143,14 +144,18 @@ export default function App() {
           />
         ) : (
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="home" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 <span className="hidden sm:inline">Home</span>
               </TabsTrigger>
+              <TabsTrigger value="social" className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span className="hidden sm:inline">Social</span>
+              </TabsTrigger>
               <TabsTrigger value="leaderboard" className="flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
-                <span className="hidden sm:inline">Leaderboard</span>
+                <span className="hidden sm:inline">Board</span>
               </TabsTrigger>
               <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="w-4 h-4" />
@@ -163,6 +168,13 @@ export default function App() {
                 onStartActivity={handleStartActivity}
                 streak={streak}
                 todayCompleted={todayCompleted}
+              />
+            </TabsContent>
+
+            <TabsContent value="social">
+              <Social
+                currentUsername={username}
+                currentStreak={streak}
               />
             </TabsContent>
 
