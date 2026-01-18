@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { Avatar, AvatarFallback } from '@/app/components/ui/avatar';
 import { Flame, MapPin, Calendar, TrendingUp, LogOut, Award, Target } from 'lucide-react';
-import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 
 interface Activity {
   id: number;
@@ -17,11 +17,13 @@ interface ProfileProps {
   username: string;
   streak: number;
   activities: Activity[];
+  goal: number;
   onLogout: () => void;
 }
 
-export function Profile({ username, streak, activities, onLogout }: ProfileProps) {
+export function Profile({ username, streak, activities, goal: initialGoal = 0, onLogout }: ProfileProps) {
   const totalDistance = activities.reduce((sum, activity) => sum + activity.distance, 0);
+  const [goal, setGoal] = useState(initialGoal); //Can now call setGoal(new_value) to set a new goal
   const totalActivities = activities.length;
   const weeklyDistance = activities
     .filter(activity => {
@@ -126,6 +128,39 @@ export function Profile({ username, streak, activities, onLogout }: ProfileProps
             <div className="text-center p-3 bg-zinc-800 border border-zinc-700 rounded-lg">
               <div className="text-3xl mb-1">🏃</div>
               <p className="text-xs font-semibold text-white">First Run</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Goals */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Award className="w-5 h-5" />
+            Goals
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-rows-2 gap-2">
+            <div className="text-center p-3 bg-zinc-800 border border-zinc-700 rounded-lg">
+            <p className="text-center font-bold text-white">Current goal: {goal}.0 (Km)</p>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="text-center p-3 bg-zinc-800 border border-zinc-700 rounded-lg">
+                 <button onClick={() => {
+                      setGoal((goal + 5))}}
+                      >Increase goal by 5.0</button>
+                </div>
+                <div className="text-center p-3 bg-zinc-800 border border-zinc-700 rounded-lg">
+                  <button onClick={() => {
+                      if (goal > 5 + initialGoal) {
+                          setGoal(goal - 5);
+                     } else {
+                          setGoal(initialGoal)
+                      }
+                  }}>Decrease goal by 5.0</button>
+                </div>
             </div>
           </div>
         </CardContent>
